@@ -67,7 +67,6 @@ include Validator
       month_input = validate_month
       year_input = validate_year
       date = { day: day_input, month: month_input, year: year_input }
-      puts date
       puts 'Insert the publisher: '
       publisher = gets.chomp
       puts 'Insert the state of the cover: '
@@ -77,6 +76,8 @@ include Validator
       puts 'add_music_album'
     when 9
       puts 'add_game'
+    when 11
+        move_book_to_archive
     else
       puts 'Invalid input'
       run
