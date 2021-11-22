@@ -15,6 +15,6 @@ class Item
 
   def can_be_archived?
     year = Time.new.year
-    year - @publish_date.year > 10
+    year - @publish_date['year'] > 10
   end
 end
