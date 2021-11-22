@@ -1,5 +1,13 @@
+require_relative 'book'
+require_relative 'handle_input_1'
+require_relative 'validator'
 # rubocop: disable Metrics
 class App
+include Handle_input_1
+include Validator
+    def initialize
+        @books = []
+    end
   def run
     choose_options = %(
       1 - List all books
@@ -37,7 +45,7 @@ class App
   def options(input)
     case input
     when 1
-      puts 'list_books'
+      show_books
       enter
     when 2
       puts 'list_music_albums'
@@ -55,7 +63,16 @@ class App
       puts 'list_authors'
       enter
     when 7
-      puts 'add_book'
+      day_input = validate_day
+      month_input = validate_month
+      year_input = validate_year
+      date = { day: day_input, month: month_input, year: year_input }
+      puts date
+      puts 'Insert the publisher: '
+      publisher = gets.chomp
+      puts 'Insert the state of the cover: '
+      cover = gets.chomp
+      add_book_input(date,publisher, cover)
     when 8
       puts 'add_music_album'
     when 9
