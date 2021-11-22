@@ -18,10 +18,6 @@ describe 'class Game' do
     expect(@g1.last_played_at).to eq 2017
   end
 
-  it 'check if should be moved to archive ' do
-    expect(@g1.move_to_archive).to be true
-  end
-
   it 'check if should not moved to archive' do
     @g2 = Game.new(2009, 2020)
     expect(@g2.move_to_archive).to be nil
