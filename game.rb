@@ -15,4 +15,3 @@ class Game < Item
     check_last_played && super ? true : false
   end
 end
-
