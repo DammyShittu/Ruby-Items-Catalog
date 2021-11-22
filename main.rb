@@ -1,3 +1,4 @@
+# rubocop: disable Metrics
 class App
   def run
     choose_options = %(
@@ -13,13 +14,13 @@ class App
       10- Exit
     ).split('\n')
     loop do
-      puts "Select an option"
+      puts 'Select an option'
       choose_options.map { |choose| puts choose }
-      print "Your Choice: "
+      print 'Your Choice: '
       user_input = gets.chomp.to_i
 
       if user_input == 10
-        puts "Thank you for using this app"
+        puts 'Thank you for using this app'
         break
       end
       puts "\n"
@@ -28,7 +29,7 @@ class App
   end
 
   def enter
-    puts "Press enter to continue"
+    puts 'Press enter to continue'
     gets
     puts
   end
@@ -36,29 +37,29 @@ class App
   def options(input)
     case input
     when 1
-      puts "list_books"
+      puts 'list_books'
       enter
     when 2
-      puts "list_music_albums"
+      puts 'list_music_albums'
       enter
     when 3
-      puts "list_games"
+      puts 'list_games'
       enter
     when 4
-      puts "list_genres"
+      puts 'list_genres'
       enter
     when 5
-      puts "list_labels"
+      puts 'list_labels'
       enter
     when 6
-      puts "list_authors"
+      puts 'list_authors'
       enter
     when 7
-      puts "add_book"
+      puts 'add_book'
     when 8
-      puts "add_music_album"
+      puts 'add_music_album'
     when 9
-      puts "add_game"
+      puts 'add_game'
     else
       puts 'Invalid input'
       run
@@ -71,4 +72,6 @@ def main
   puts 'Welcome to the catalog of my things!'
   new_app.run
 end
+
+# rubocop: enable Metrics
 main
