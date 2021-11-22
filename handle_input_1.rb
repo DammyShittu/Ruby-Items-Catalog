@@ -35,4 +35,29 @@ module Handle_input_1
         @labels.each_with_index {|label,index| str = label.color
         puts "#{index+1} | Label title: #{label.title} | Color: #{(label.color).send(str)}"}
     end
+
+    def get_label ind
+        @books[ind] ? show_labels : (puts "The book that you selected doesn't exist"
+        enter)
+    end
+
+    def set_label ind,ind2
+        @labels[ind2] ? @labels[ind2].add_item(@books[ind]) : (puts "The label you selected doesn't exist"
+        enter)
+        puts "Label #{@labels[ind2].title} assigned to the book published by #{@books[ind].publisher}"
+        enter
+    end
+
+    def show_items_by_label ind
+        @labels[ind] ? if @labels[ind].items.empty? == false
+            @labels[ind].items.each_with_index {|book,index| puts "#{index+1} | Book published by #{book.publisher} in "\
+            "#{book.publish_date[:year]} | Condition: #{book.cover_state} | Archivable: #{book.archivable} | Archived: #{book.archived}"}
+            enter
+        else 
+            puts "Label doesn't have any item" 
+            enter
+        end
+        : (puts "The label you selected doesn't exist"
+        enter)
+    end
 end

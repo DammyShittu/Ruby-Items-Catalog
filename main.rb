@@ -33,6 +33,8 @@ include Storage
       TEMPORARY
       11 - Move a book to the archive
       12 - Create a new label
+      13 - Assign a label to a book
+      14 - Show items by label
     ).split('\n')
     loop do
       puts 'Select an option'
@@ -101,6 +103,19 @@ include Storage
         create_label(name,color)
         puts "Label #{name} succesfully created"
         enter
+    when 13
+        show_books
+        puts "Select the index of the book to change: "
+        ind = gets.chomp.to_i
+        get_label(ind-1)
+        puts "Select the label to be assigned: "
+        ind2 = gets.chomp.to_i
+        set_label(ind-1,ind2-1)
+    when 14
+        show_labels
+        puts "Select the label to show its items: "
+        option = gets.chomp.to_i
+        show_items_by_label(option-1)
     else
       puts 'Invalid input'
       run

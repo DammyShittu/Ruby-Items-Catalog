@@ -6,7 +6,7 @@ class Label
       @items = []
     end
   
-    attr_accessor :archived
+    attr_accessor :archived, :items
     attr_reader :title, :color
   
     def add_item(item)
