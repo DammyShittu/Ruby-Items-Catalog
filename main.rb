@@ -14,6 +14,7 @@ include Storage
         @books = []
         @labels = []
         read_json_books if File.exist?('./local/books.json')
+        read_json_labels if File.exist?('./local/labels.json')
         # read_json_labels
     end
   def run
@@ -92,12 +93,14 @@ include Storage
     when 11
         move_book_to_archive
     when 12
-        puts "Insert name of the label:"
+        puts "Insert title of the label:"
         name = gets.chomp
         puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n#{'Blue'.blue}\n#{'Pink'.pink}"
         color = validate_color('Color selection: ')
         puts color
         create_label(name,color)
+        puts "Label #{name} succesfully created"
+        enter
     else
       puts 'Invalid input'
       run

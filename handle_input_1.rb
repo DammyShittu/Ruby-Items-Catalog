@@ -29,8 +29,6 @@ module Handle_input_1
 
     def create_label(title,color)
         @labels << Label.new(title,color)
-        puts "Label #{title} succesfully created"
-        enter
     end
 
     def show_labels

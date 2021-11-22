@@ -4,8 +4,13 @@ module Storage
       books_json = File.read('./local/books.json') 
       data_books = JSON.parse(books_json)
       data_books.each { |book| date = { day: book['publish_date']['day'], month: book['publish_date']['month'], year: book['publish_date']['year'] }
-      puts date
       add_book_input(date, book['publisher'], book['cover_state']) }
+    end
+
+    def read_json_labels
+      labels_json = File.read('./local/labels.json') 
+      data_labels = JSON.parse(labels_json)
+      data_labels.each {|label| create_label(label['title'],label['color'])}
     end
   
     def save_json
