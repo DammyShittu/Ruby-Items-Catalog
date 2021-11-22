@@ -1,12 +1,12 @@
+require_relative 'label'
 module Handle_input_1
     def add_book_input(publish_date,publisher,cover)
         @books << Book.new(publish_date,publisher, cover)
-        puts "Cover state is #{cover}"
     end
 
     def show_books
         @books.each_with_index {|book,index| puts "#{index+1} | Book published by #{book.publisher} in "\
-        "#{book.publish_date[:year]} condition: #{book.cover_state} | Archivable: #{book.archivable} | Archived: #{book.archived}"} unless @books.empty?
+        "#{book.publish_date[:year]} | Condition: #{book.cover_state} | Archivable: #{book.archivable} | Archived: #{book.archived}"} unless @books.empty?
     end
 
     def move_book_to_archive
@@ -29,10 +29,12 @@ module Handle_input_1
 
     def create_label(title,color)
         @labels << Label.new(title,color)
+        puts "Label #{title} succesfully created"
+        enter
     end
 
     def show_labels
-
+        @labels.each_with_index {|label,index| str = label.color
+        puts "#{index+1} | Label title: #{label.title} | Color: #{(label.color).send(str)}"}
     end
-
 end

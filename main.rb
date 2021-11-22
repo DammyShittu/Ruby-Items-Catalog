@@ -2,13 +2,19 @@ require_relative 'book'
 require_relative 'handle_input_1'
 require_relative 'validator'
 require_relative 'color'
+require_relative 'storage'
+require 'json'
+
 # rubocop: disable Metrics
 class App
 include Handle_input_1
 include Validator
+include Storage
     def initialize
         @books = []
         @labels = []
+        read_json_books if File.exist?('./local/books.json')
+        # read_json_labels
     end
   def run
     choose_options = %(
@@ -22,6 +28,10 @@ include Validator
       8 - Add a music album
       9 - Add a game
       10- Exit
+
+      TEMPORARY
+      11 - Move a book to the archive
+      12 - Create a new label
     ).split('\n')
     loop do
       puts 'Select an option'
@@ -31,6 +41,7 @@ include Validator
 
       if user_input == 10
         puts 'Thank you for using this app'
+        save_json
         break
       end
       puts "\n"
@@ -83,8 +94,9 @@ include Validator
     when 12
         puts "Insert name of the label:"
         name = gets.chomp
-        puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n#{'Blue'.blue}\n#{'Pink'.pink}\n#{'Light Blue'.light_blue}"
-        color = gets.chomp
+        puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n#{'Blue'.blue}\n#{'Pink'.pink}"
+        color = validate_color('Color selection: ')
+        puts color
         create_label(name,color)
     else
       puts 'Invalid input'

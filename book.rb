@@ -14,7 +14,7 @@ class Book < Item
     private
     def can_be_archived?
         bool = super
-        if bool == true || @cover_state.eql?('bad')
+        if bool == true || @cover_state.downcase.eql?('bad')
             @archivable = true
         else
             @archivable = false
