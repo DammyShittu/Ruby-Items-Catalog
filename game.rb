@@ -13,10 +13,6 @@ class Game < Item
     year = Time.new.year
     check_publish = year - @publish_date > 10
     check_last_played = year - @last_played_at > 2
-    if check_last_played && check_publish
-      true
-    else
-      false
-    end
+    check_last_played && check_publish ? true : false
   end
 end
