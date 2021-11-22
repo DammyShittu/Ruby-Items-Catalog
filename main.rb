@@ -1,12 +1,14 @@
 require_relative 'book'
 require_relative 'handle_input_1'
 require_relative 'validator'
+require_relative 'color'
 # rubocop: disable Metrics
 class App
 include Handle_input_1
 include Validator
     def initialize
         @books = []
+        @labels = []
     end
   def run
     choose_options = %(
@@ -57,15 +59,15 @@ include Validator
       puts 'list_genres'
       enter
     when 5
-      puts 'list_labels'
+      show_labels
       enter
     when 6
       puts 'list_authors'
       enter
     when 7
-      day_input = validate_day
-      month_input = validate_month
-      year_input = validate_year
+      day_input = validate_day('Insert the day of publishment (1-31)')
+      month_input = validate_month('Insert the month of publishment(1-12)')
+      year_input = validate_year('Insert the year of publishment')
       date = { day: day_input, month: month_input, year: year_input }
       puts 'Insert the publisher: '
       publisher = gets.chomp
@@ -78,6 +80,12 @@ include Validator
       puts 'add_game'
     when 11
         move_book_to_archive
+    when 12
+        puts "Insert name of the label:"
+        name = gets.chomp
+        puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n#{'Blue'.blue}\n#{'Pink'.pink}\n#{'Light Blue'.light_blue}"
+        color = gets.chomp
+        create_label(name,color)
     else
       puts 'Invalid input'
       run

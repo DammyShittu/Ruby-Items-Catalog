@@ -9,11 +9,11 @@ class Book < Item
         can_be_archived?
     end
     attr_reader :publisher, :cover_state, :archivable, :publish_date
+    attr_accessor :archived
 
     private
     def can_be_archived?
         bool = super
-        puts bool
         if bool == true || @cover_state.eql?('bad')
             @archivable = true
         else
