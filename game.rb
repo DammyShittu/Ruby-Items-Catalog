@@ -16,5 +16,5 @@ class Game < Item
   end
 end
 
-g1 = Game.new(2002, 2020)
+g1 = Game.new(2002, 2017)
 puts g1.move_to_archive
