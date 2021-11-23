@@ -27,6 +27,10 @@ module Validator
   def validate_spotify_status(str)
     puts str
     on_spotify = gets.chomp.downcase
-    on_spotify == 'y' ? true : on_spotify == 'n' ? false : validate_spotify_status('Please, select y/n')
+    if on_spotify == 'y'
+      true
+    else
+      on_spotify == 'n' ? false : validate_spotify_status('Please, select y/n')
+    end
   end
 end
