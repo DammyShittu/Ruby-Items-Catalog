@@ -11,8 +11,9 @@ class Game < Item
 
   def can_be_archived?
     year = Time.new.year
-    check_publish = year - @publish_date['year'] > 10
-    check_last_played = year - @last_played_at > 2
-    check_last_played && check_publish ? true : false
+    bool = super
+    # check_publish = year - @publish_date['year'] > 10
+    # check_last_played = year - @last_played_at > 2
+    year - @last_played_at > 2 && bool ? true : false
   end
 end
