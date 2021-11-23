@@ -1,22 +1,7 @@
 require './game'
 require './author'
+
 module GameModule
-  # rubocop: disable Layout/LineLength
-  def game_list
-    @games.each_with_index do |game, i|
-      date_obj = game.publish_date
-      play_date = game.last_played_at
-      game.move_to_archive
-      puts "#{i} - Published on: #{date_obj[:year]}/#{date_obj[:month]}/#{date_obj[:day]} | Last Played: #{play_date[:year]}/#{play_date[:month]}/#{play_date[:day]} | Archived: #{game.archived}"
-    end
-    puts ' -------------------------------- '
-  end
-  # rubocop: enable Layout/LineLength
-
-  def authors_list
-    puts 'No author yet'
-  end
-
   def game_info
     puts 'When was this game published'
     date_of_publish = input_date('of Publish')
@@ -31,20 +16,10 @@ module GameModule
     know_author = game_feature('author')
     if know_author
       puts 'Lets create an Author for this game'
-      author = create_author
-      @authors << author
-      game.add_author(author)
+      create_author(game)
+    else
+      puts 'No worries!! You can always create it later by using "15" option.'
     end
-    puts 'No worries!! You can always create it later by using "15" option.'
-  end
-
-  def create_author
-    puts 'Please add first name of the author'
-    first  = gets.chomp
-    puts 'Please add last name of the author'
-    last  = gets.chomp
-    Author.new(first, last)
-    
   end
 
   def input_date(val)
@@ -69,5 +44,46 @@ module GameModule
       puts 'Invalid Input. Insert "Y" if multiplayer, "N" if single player'
       game_feature(val)
     end
+  end
+
+  def create_author(game)
+    first, last = author_input
+    if @authors.length.positive? 
+      bool, author_value = validate_author(first, last)
+      # @authors.each do |author|
+      #   game.add_author(author) if author.f_name == first && author.l_name == last
+      # end
+      if bool 
+        game.add_author(author_value)
+      else
+        @authors.push(Author.new(first, last))
+        puts author_value
+      end
+    else
+      author = Author.new(first, last)
+      @authors.push(author)
+      game.add_author(author)
+    end
+  end
+
+  def create_new_author
+    first, last = author_input
+    author = Author.new(first, last)
+    @authors.push(author)
+  end
+
+  def validate_author(first, last)
+    @authors.each do |author|
+      author.f_name == first && author.l_name == last ? [true, author] : [false, 'new author created']
+    end
+  end
+
+
+  def author_input
+    puts 'Please add first name of the author'
+    first = gets.chomp
+    puts 'Please add last name of the author'
+    last = gets.chomp
+    [first, last]
   end
 end
