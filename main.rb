@@ -15,7 +15,6 @@ class App
     @labels = []
     read_json_books if File.exist?('./local/books.json')
     read_json_labels if File.exist?('./local/labels.json')
-    # read_json_labels
   end
 
   def run
