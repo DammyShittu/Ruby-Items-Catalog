@@ -1,18 +1,23 @@
+require 'json'
 require_relative 'book'
 require_relative 'handle_input_1'
 require_relative 'validator'
 require_relative 'color'
 require_relative 'storage'
-require 'json'
+require_relative 'album_genre_input'
 
 # rubocop: disable Metrics
 class App
   include HandleInput1
   include Validator
   include Storage
+  include HandleAlbumAndGenreInput
+
   def initialize
     @books = []
     @labels = []
+    @albums = []
+    @genres = []
     read_json_books if File.exist?('./local/books.json')
     read_json_labels if File.exist?('./local/labels.json')
   end
@@ -64,13 +69,13 @@ class App
       show_books
       enter
     when 2
-      puts 'list_music_albums'
+      list_all_albums
       enter
     when 3
       puts 'list_games'
       enter
     when 4
-      puts 'list_genres'
+      list_all_genres
       enter
     when 5
       show_labels
@@ -89,7 +94,8 @@ class App
       cover = gets.chomp
       add_book_input(date, publisher, cover)
     when 8
-      puts 'add_music_album'
+      add_music_album
+      enter
     when 9
       puts 'add_game'
     when 11

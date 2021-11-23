@@ -23,4 +23,10 @@ module Validator
     color = gets.chomp.downcase
     colors.any?(color) ? color : validate_color('Please select a color from the available list')
   end
+
+  def validate_spotify_status(str)
+    puts str
+    on_spotify = gets.chomp.downcase
+    on_spotify == 'y' ? true : on_spotify == 'n' ? false : validate_spotify_status('Please, select y/n')
+  end
 end
