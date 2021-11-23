@@ -9,7 +9,9 @@ class Author
   end
 
   def add_author(game)
-    game.author = self
-    @items << game
+    unless game.author
+      game.author = self
+      @items << game
+    end 
   end
 end
