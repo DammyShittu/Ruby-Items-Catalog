@@ -2,9 +2,8 @@ require_relative 'spec_helper'
 
 RSpec.describe Label do
   before :each do
-    
-    @label = Label.new('Important','red')
-    @book = Book.new({ day: 12, month: 8, year: 1950 },'Mondadori', 'good')
+    @label = Label.new('Important', 'red')
+    @book = Book.new({ day: 12, month: 8, year: 1950 }, 'Mondadori', 'good')
   end
   it 'Creates a Label object from parameters' do
     @label.should be_an_instance_of Label

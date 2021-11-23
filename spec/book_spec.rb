@@ -2,11 +2,9 @@ require_relative 'spec_helper'
 
 RSpec.describe Book do
   before :each do
-    
-    @book1 = Book.new({ day: 12, month: 8, year: 1950 },'Mondadori', 'good')
-    @book2 = Book.new({ day: 16, month: 12, year: 2020 },'Feltrinelli', 'bad')
-    @book3 = Book.new({ day: 10, month: 1, year: 2020 },'Amazon', 'good')
-
+    @book1 = Book.new({ day: 12, month: 8, year: 1950 }, 'Mondadori', 'good')
+    @book2 = Book.new({ day: 16, month: 12, year: 2020 }, 'Feltrinelli', 'bad')
+    @book3 = Book.new({ day: 10, month: 1, year: 2020 }, 'Amazon', 'good')
   end
   it 'Creates a Book object from parameters' do
     @book1.should be_an_instance_of Book

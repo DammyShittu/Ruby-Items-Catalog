@@ -7,16 +7,17 @@ require 'json'
 
 # rubocop: disable Metrics
 class App
-include Handle_input_1
-include Validator
-include Storage
-    def initialize
-        @books = []
-        @labels = []
-        read_json_books if File.exist?('./local/books.json')
-        read_json_labels if File.exist?('./local/labels.json')
-        # read_json_labels
-    end
+  include Handle_input_1
+  include Validator
+  include Storage
+  def initialize
+    @books = []
+    @labels = []
+    read_json_books if File.exist?('./local/books.json')
+    read_json_labels if File.exist?('./local/labels.json')
+    # read_json_labels
+  end
+
   def run
     choose_options = %(
       1 - List all books
@@ -87,35 +88,35 @@ include Storage
       publisher = gets.chomp
       puts 'Insert the state of the cover: '
       cover = gets.chomp
-      add_book_input(date,publisher, cover)
+      add_book_input(date, publisher, cover)
     when 8
       puts 'add_music_album'
     when 9
       puts 'add_game'
     when 11
-        move_book_to_archive
+      move_book_to_archive
     when 12
-        puts "Insert title of the label:"
-        name = gets.chomp
-        puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n#{'Blue'.blue}\n#{'Pink'.pink}"
-        color = validate_color('Color selection: ')
-        puts color
-        create_label(name,color)
-        puts "Label #{name} succesfully created"
-        enter
+      puts 'Insert title of the label:'
+      name = gets.chomp
+      puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n#{'Blue'.blue}\n#{'Pink'.pink}"
+      color = validate_color('Color selection: ')
+      puts color
+      create_label(name, color)
+      puts "Label #{name} succesfully created"
+      enter
     when 13
-        show_books
-        puts "Select the index of the book to change: "
-        ind = gets.chomp.to_i
-        get_label(ind-1)
-        puts "Select the label to be assigned: "
-        ind2 = gets.chomp.to_i
-        set_label(ind-1,ind2-1)
+      show_books
+      puts 'Select the index of the book to change: '
+      ind = gets.chomp.to_i
+      get_label(ind - 1)
+      puts 'Select the label to be assigned: '
+      ind2 = gets.chomp.to_i
+      set_label(ind - 1, ind2 - 1)
     when 14
-        show_labels
-        puts "Select the label to show its items: "
-        option = gets.chomp.to_i
-        show_items_by_label(option-1)
+      show_labels
+      puts 'Select the label to show its items: '
+      option = gets.chomp.to_i
+      show_items_by_label(option - 1)
     else
       puts 'Invalid input'
       run

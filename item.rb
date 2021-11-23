@@ -3,9 +3,6 @@ class Item
     @id = Random.rand(1..1000)
     @publish_date = publish_date
     @archived = false
-    @label = nil
-    @author = nil
-    @genre = nil
   end
 
   attr_accessor :archived, :label, :author, :genre
@@ -18,6 +15,6 @@ class Item
 
   def can_be_archived?
     year = Time.new.year
-    return year - @publish_date[:year] > 10 ? true : false
+    year - @publish_date[:year] > 10
   end
 end
