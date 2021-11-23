@@ -8,7 +8,7 @@ class Author
     @items = []
   end
 
-  def add_author(game)
+  def add_item(game)
     if game.author
       nil
     else

@@ -30,7 +30,7 @@ describe 'class Game' do
 
   it 'Check if game has an assigned artist' do
     @author1 = Author.new('F_name', 'L_name')
-    @g1.add_item(@author1)
+    @g1.add_author(@author1)
     expect(@g1.author).to be @author1
   end
 end
@@ -57,8 +57,8 @@ describe 'Author Class' do
   end
 
   it('check if items in a1 include game1 and game2') do
-    @a1.add_author(@game1)
-    @a1.add_author(@game2)
+    @a1.add_item(@game1)
+    @a1.add_item(@game2)
     expect(@a1.items.length).to be 2
     expect(@game1.author).to be @a1
     expect(@game2.author).to be @a1

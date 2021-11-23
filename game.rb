@@ -16,7 +16,7 @@ class Game < Item
     check_last_played && bool
   end
 
-  def add_item(author)
-    author.add_author(self) unless author.items.include?(self)
+  def add_author(author)
+    author.add_item(self) unless author.items.include?(self)
   end
 end
