@@ -7,7 +7,7 @@ require 'json'
 
 # rubocop: disable Metrics
 class App
-  include Handle_input_1
+  include HandleInput1
   include Validator
   include Storage
   def initialize
@@ -31,7 +31,7 @@ class App
       9 - Add a game
       10- Exit
 
-      TEMPORARY
+      Additional functions
       11 - Move a book to the archive
       12 - Create a new label
       13 - Assign a label to a book
@@ -98,7 +98,8 @@ class App
     when 12
       puts 'Insert title of the label:'
       name = gets.chomp
-      puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n#{'Blue'.blue}\n#{'Pink'.pink}"
+      puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n"\
+           "#{'Blue'.blue}\n#{'Pink'.pink}"
       color = validate_color('Color selection: ')
       puts color
       create_label(name, color)
