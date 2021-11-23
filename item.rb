@@ -1,4 +1,6 @@
 class Item
+  attr_accessor :publish_date
+
   def initialize(publish_date)
     @id = Random.rand(1..1000)
     @publish_date = publish_date
@@ -13,6 +15,6 @@ class Item
 
   def can_be_archived?
     year = Time.new.year
-    year - @publish_date.year > 10
+    year - @publish_date[:year] > 10
   end
 end
