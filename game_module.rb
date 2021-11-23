@@ -2,6 +2,21 @@ require './game'
 require './author'
 module GameModule
   # rubocop: disable Layout/LineLength
+  def game_list
+    @games.each_with_index do |game, i|
+      date_obj = game.publish_date
+      play_date = game.last_played_at
+      game.move_to_archive
+      puts "#{i} - Published on: #{date_obj[:year]}/#{date_obj[:month]}/#{date_obj[:day]} | Last Played: #{play_date[:year]}/#{play_date[:month]}/#{play_date[:day]} | Archived: #{game.archived}"
+    end
+    puts ' -------------------------------- '
+  end
+  # rubocop: enable Layout/LineLength
+
+  def authors_list
+    puts 'No author yet'
+  end
+
   def game_info
     puts 'When was this game published'
     date_of_publish = input_date('of Publish')
