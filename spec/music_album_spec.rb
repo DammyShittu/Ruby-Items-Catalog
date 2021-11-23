@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe MusicAlbum do
   before :each do
     @album1 = MusicAlbum.new({ day: 17, month: 10, year: 1988 }, false)
-    @album2 = MusicAlbum.new({ day: 31, month: 05, year: 2010 }, true)
+    @album2 = MusicAlbum.new({ day: 31, month: 5, year: 2010 }, true)
   end
 
   it 'checks if album_1 is an instance of the MusicAlbum class' do
