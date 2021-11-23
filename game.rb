@@ -1,7 +1,7 @@
 require './item'
 
 class Game < Item
-  attr_accessor :last_played_at, :multiplayer
+  attr_accessor :last_played_at, :multiplayer, :author
 
   def initialize(publish_date, last_played_at, multiplayer: false)
     super(publish_date)
@@ -15,4 +15,10 @@ class Game < Item
     check_last_played = year - @last_played_at > 2
     check_last_played && bool
   end
+
+  def add_item(author)
+    author.add_author(self) unless author.items.include?(self)
+  end
+
 end
+
