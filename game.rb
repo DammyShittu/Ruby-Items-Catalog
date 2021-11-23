@@ -19,6 +19,4 @@ class Game < Item
   def add_item(author)
     author.add_author(self) unless author.items.include?(self)
   end
-
 end
-
