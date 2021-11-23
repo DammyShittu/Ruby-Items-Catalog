@@ -11,6 +11,11 @@ class Item
     can_be_archived? ? @archived = true : nil
   end
 
+  def add_genre(genre)
+    @genre = genre
+    genre.items.push(self) unless genre.items.include?(self)
+  end
+
   private
 
   def can_be_archived?
