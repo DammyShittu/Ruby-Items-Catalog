@@ -1,6 +1,9 @@
 require_relative 'item'
 
 class Book < Item
+  attr_reader :publisher, :cover_state, :archivable, :publish_date
+  attr_accessor :archived
+
   def initialize(publish_date, publisher, cover_state)
     super(publish_date)
     @archivable = false
@@ -8,17 +11,11 @@ class Book < Item
     @cover_state = cover_state
     can_be_archived?
   end
-  attr_reader :publisher, :cover_state, :archivable, :publish_date
-  attr_accessor :archived
 
   private
 
   def can_be_archived?
     bool = super
-    @archivable = if bool || @cover_state.downcase.eql?('bad')
-                    true
-                  else
-                    false
-                  end
+    @archivable = bool || @cover_state.downcase.eql?('bad')
   end
 end
