@@ -4,15 +4,19 @@ require_relative 'validator'
 require_relative 'color'
 require_relative 'storage'
 require 'json'
+require './game_module'
 
 # rubocop: disable Metrics
 class App
   include HandleInput1
   include Validator
   include Storage
+  include GameModule
   def initialize
     @books = []
     @labels = []
+    @games = []
+    @authors = []
     read_json_books if File.exist?('./local/books.json')
     read_json_labels if File.exist?('./local/labels.json')
   end
@@ -67,7 +71,7 @@ class App
       puts 'list_music_albums'
       enter
     when 3
-      puts 'list_games'
+      game_list
       enter
     when 4
       puts 'list_genres'
@@ -76,7 +80,7 @@ class App
       show_labels
       enter
     when 6
-      puts 'list_authors'
+      authors_list
       enter
     when 7
       day_input = validate_day('Insert the day of publishment (1-31)')
@@ -91,7 +95,7 @@ class App
     when 8
       puts 'add_music_album'
     when 9
-      puts 'add_game'
+      game_info
     when 11
       move_book_to_archive
     when 12
