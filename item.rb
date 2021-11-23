@@ -1,13 +1,11 @@
 class Item
-  attr_accessor :publish_date
+  attr_accessor :publish_date, :archived, :label, :author, :genre
 
   def initialize(publish_date)
     @id = Random.rand(1..1000)
     @publish_date = publish_date
     @archived = false
   end
-
-  attr_accessor :archived, :label, :author, :genre
 
   def move_to_archive
     can_be_archived? ? @archived = true : nil
