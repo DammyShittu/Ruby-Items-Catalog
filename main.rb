@@ -20,6 +20,7 @@ class App
     @genres = []
     read_json_books if File.exist?('./local/books.json')
     read_json_labels if File.exist?('./local/labels.json')
+    read_json_musicalbum if File.exist?('./local/music_album.json')
   end
 
   def run
