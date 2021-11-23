@@ -5,6 +5,8 @@ require_relative 'color'
 require_relative 'storage'
 require 'json'
 require './game_module'
+require './game_list_module'
+require './authors_games'
 
 # rubocop: disable Metrics
 class App
@@ -12,6 +14,8 @@ class App
   include Validator
   include Storage
   include GameModule
+  include DisplayList
+  include SaveToJson
   def initialize
     @books = []
     @labels = []
@@ -39,6 +43,7 @@ class App
       12 - Create a new label
       13 - Assign a label to a book
       14 - Show items by label
+      20 - Create Author
     ).split('\n')
     loop do
       puts 'Select an option'
@@ -49,6 +54,7 @@ class App
       if user_input == 10
         puts 'Thank you for using this app'
         save_json
+        save_games_authors
         break
       end
       puts "\n"
@@ -71,7 +77,7 @@ class App
       puts 'list_music_albums'
       enter
     when 3
-      game_list
+      display_games
       enter
     when 4
       puts 'list_genres'
@@ -80,7 +86,7 @@ class App
       show_labels
       enter
     when 6
-      authors_list
+      display_authors
       enter
     when 7
       day_input = validate_day('Insert the day of publishment (1-31)')
@@ -121,6 +127,8 @@ class App
       puts 'Select the label to show its items: '
       option = gets.chomp.to_i
       show_items_by_label(option - 1)
+    when 20
+      create_new_author
     else
       puts 'Invalid input'
       run
