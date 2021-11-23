@@ -40,6 +40,7 @@ class App
       12 - Create a new label
       13 - Assign a label to a book
       14 - Show items by label
+      15 - Create a genre
     ).split('\n')
     loop do
       puts 'Select an option'
@@ -123,6 +124,9 @@ class App
       puts 'Select the label to show its items: '
       option = gets.chomp.to_i
       show_items_by_label(option - 1)
+    when 15
+      create_genre
+      enter
     else
       puts 'Invalid input'
       run

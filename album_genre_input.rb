@@ -1,5 +1,6 @@
 require_relative 'validator'
 require_relative 'music_album'
+require_relative 'genre'
 
 module HandleAlbumAndGenreInput
   include Validator
@@ -31,5 +32,13 @@ module HandleAlbumAndGenreInput
 
     @albums << MusicAlbum.new(date_of_publish, spotify)
     puts 'Album has been successfully created'
+  end
+
+  def create_genre
+    print 'Please, enter the genre you want to create(Hip-hop, Rap, etc): '
+    new_genre = gets.chomp
+    @genres << Genre.new(new_genre)
+    sleep 0.5
+    puts "New genre [#{new_genre}] has been successfuly created"
   end
 end
