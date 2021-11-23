@@ -19,7 +19,7 @@ describe 'class Game' do
   end
 
   it 'check if should not moved to archive' do
-    @g2 = Game.new(2009, 2020)
+    @g2 = Game.new({ 'year' => 2009 }, 2020)
     expect(@g2.move_to_archive).to be nil
   end
 
