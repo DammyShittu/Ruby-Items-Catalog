@@ -23,6 +23,8 @@ class App
     @authors = []
     read_json_books if File.exist?('./local/books.json')
     read_json_labels if File.exist?('./local/labels.json')
+    read_authors if File.exist?('author.json')
+    read_games if File.exist?('games.json')
   end
 
   def run
