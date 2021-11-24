@@ -3,9 +3,9 @@ module DisplayList
   def display_games
     puts 'No Games to display' if @games.empty?
     @games.each_with_index do |game, i|
-      date_obj = game.publish_date
-      play_date = game.last_played_at
       game.move_to_archive
+      play_date = game.last_played_at
+      date_obj = game.publish_date
       puts "#{i + 1} - Published on: #{date_obj[:year]}/#{date_obj[:month]}/#{date_obj[:day]} | Last Played: #{play_date[:year]}/#{play_date[:month]}/#{play_date[:day]} | Archived: #{game.archived}"
     end
     puts ' -------------------------------- '
