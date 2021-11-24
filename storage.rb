@@ -24,7 +24,7 @@ module Storage
 
     JSON.parse(File.read(file)).each do |album|
       date = { day: album['publish_date']['day'], month: album['publish_date']['month'],
-        year: album['publish_date']['year'] }
+               year: album['publish_date']['year'] }
       @albums << MusicAlbum.new(album['name'], date, album['on_spotify'])
     end
   end

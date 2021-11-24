@@ -19,11 +19,11 @@ describe MusicAlbum do
   end
 
   it 'checks if album_1 name is Apollo' do
-    expect(@album1.name).to eq "Apollo"
+    expect(@album1.name).to eq 'Apollo'
   end
 
   it 'checks if album_2 name is not Carpe Diem' do
-    expect(@album2.name).not_to be "Carpe Diem"
+    expect(@album2.name).not_to be 'Carpe Diem'
   end
 
   it 'checks if album1 can be archived' do

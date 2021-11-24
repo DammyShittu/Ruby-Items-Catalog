@@ -8,7 +8,8 @@ module HandleAlbumAndGenreInput
   def list_all_albums
     puts 'No music album has been added yet! Please, add one' if @albums.empty?
     @albums.each_with_index do |album, index|
-      puts "#{index + 1}) #{album.name} album was published on #{album.publish_date[:year]}-#{album.publish_date[:month]}-#{album.publish_date[:day]} "\
+      puts "#{index + 1}) #{album.name} album was published on #{album.publish_date[:year]}-"\
+           "#{album.publish_date[:month]}-#{album.publish_date[:day]} "\
            " | On Spotify: #{album.on_spotify} | Archivable : #{album.can_be_archived?} "
     end
   end
@@ -23,7 +24,7 @@ module HandleAlbumAndGenreInput
 
   def add_music_album
     puts 'Please, type the album name: '
-    name =  gets.chomp
+    name = gets.chomp
     album_day = validate_day('Please, enter the day the album was published (1-31)')
     album_month = validate_month('Please, enter the month the album was published (1-12)')
     album_year = validate_year('Please, enter the year the album was published')
