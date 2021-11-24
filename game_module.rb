@@ -48,22 +48,9 @@ module GameModule
 
   def create_author(game)
     first, last = author_input
-    if @authors.length.positive? 
-      bool, author_value = validate_author(first, last)
-      # @authors.each do |author|
-      #   game.add_author(author) if author.f_name == first && author.l_name == last
-      # end
-      if bool 
-        game.add_author(author_value)
-      else
-        @authors.push(Author.new(first, last))
-        puts author_value
-      end
-    else
-      author = Author.new(first, last)
-      @authors.push(author)
-      game.add_author(author)
-    end
+    author = Author.new(first, last)
+    @authors.push(author)
+    game.add_author(author)
   end
 
   def create_new_author
@@ -73,11 +60,10 @@ module GameModule
   end
 
   def validate_author(first, last)
-    @authors.each do |author|
-      author.f_name == first && author.l_name == last ? [true, author] : [false, 'new author created']
+    @authors.each do |author_match|
+      author_match.f_name == first && author_match.l_name == last ? [true, author_match] : [false, 'new author created']
     end
   end
-
 
   def author_input
     puts 'Please add first name of the author'
