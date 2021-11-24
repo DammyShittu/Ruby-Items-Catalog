@@ -99,11 +99,13 @@ class App
       enter
     when 7
       create_book
+      enter
     when 8
       add_music_album
       enter
     when 9
       game_info
+      enter
     when 11
       move_book_to_archive
     when 12
@@ -120,6 +122,7 @@ class App
       enter
     when 16
       create_new_author
+      enter
     else
       puts 'Invalid input'
       run
