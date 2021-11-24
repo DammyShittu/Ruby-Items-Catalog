@@ -8,17 +8,19 @@ module GameModule
     puts 'When did you last play this game?'
     date_last_played = input_date('when last played')
     puts 'Is multiplayer'
-    bool = game_feature('multiplayer')
+    bool = validate_bool_input("Insert 'Y' if Mulitplayer, 'N' if not")
     game = Game.new(date_of_publish, date_last_played)
     game.multiplayer = bool if bool
     @games << game
     puts 'Do you know author of the game?'
-    know_author = game_feature('author')
+    know_author = validate_bool_input("Insert 'Y' if Yes, 'N' if not")
     if know_author
       puts 'Lets create an Author for this game'
       create_author(game)
+      puts 'Game and Author created successfully'
     else
-      puts 'No worries!! You can always create it later by using "15" option.'
+      puts 'No worries!! You can always create it later by using "16" option.'
+      puts 'Game created successfully'
     end
   end
 
@@ -33,19 +35,6 @@ module GameModule
     }
   end
 
-  def game_feature(val)
-    puts "Insert 'Y' if #{val}, 'N' if not"
-    user_input = gets.chomp.downcase
-    if user_input.include?('y')
-      true
-    elsif user_input.include?('n')
-      false
-    else
-      puts 'Invalid Input. Insert "Y" if multiplayer, "N" if single player'
-      game_feature(val)
-    end
-  end
-
   def create_author(game)
     first, last = author_input
     author = Author.new(first, last)
@@ -57,6 +46,7 @@ module GameModule
     first, last = author_input
     author = Author.new(first, last)
     @authors.push(author)
+    puts 'Author created successfully'
   end
 
   def validate_author(first, last)
