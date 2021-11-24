@@ -3,6 +3,7 @@ require_relative 'label'
 module HandleInput1
   def add_book_input(publish_date, publisher, cover)
     @books << Book.new(publish_date, publisher, cover)
+    puts "Book created succesfully!"
   end
 
   def show_books
@@ -57,9 +58,13 @@ module HandleInput1
   end
 
   def show_labels
-    @labels.each_with_index do |label, index|
-      str = label.color
-      puts "#{index + 1} | Label title: #{label.title} | Color: #{(label.color).send(str)}"
+    if @books.empty?
+      puts 'No label to be listed'
+    else
+      @labels.each_with_index do |label, index|
+        str = label.color
+        puts "#{index + 1} | Label title: #{label.title} | Color: #{(label.color).send(str)}"
+      end
     end
   end
 

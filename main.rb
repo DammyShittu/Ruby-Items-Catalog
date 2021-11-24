@@ -86,6 +86,7 @@ class App
       enter
     when 7
       create_book
+      enter
     when 8
       add_music_album
       enter
