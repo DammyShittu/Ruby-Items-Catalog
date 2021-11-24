@@ -98,6 +98,7 @@ module HandleInput1
           run
         else
           @labels[ind2].add_item(@books[ind])
+          @labels.each_with_index {|label, index| label.items.include? @books[ind] && index != ind2 ? label.items.delete(@books[ind]) : nil}
           puts "Label #{@labels[ind2].title} assigned to the book published by #{@books[ind].publisher}"
           enter
         end
