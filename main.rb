@@ -4,6 +4,9 @@ require_relative 'handle_input_1'
 require_relative 'validator'
 require_relative 'color'
 require_relative 'storage'
+require './game_module'
+require './game_list_module'
+require './authors_games'
 require_relative 'album_genre_input'
 
 # rubocop: disable Metrics
@@ -11,15 +14,23 @@ class App
   include HandleInput1
   include Validator
   include Storage
+  include GameModule
+  include DisplayList
+  include SaveToJson
   include HandleAlbumAndGenreInput
-
   def initialize
     @books = []
     @labels = []
+    @games = []
+    @authors = []
     @albums = []
     @genres = []
     read_json_books if File.exist?('./local/books.json')
     read_json_labels if File.exist?('./local/labels.json')
+    read_authors if File.exist?('./local/author.json')
+    read_games if File.exist?('./local/games.json')
+    read_json_musicalbum if File.exist?('./local/music_album.json')
+    read_json_genre if File.exist?('./local/genre.json')
   end
 
   def run
@@ -41,6 +52,7 @@ class App
       13 - Assign a label to a book
       14 - Show items by label
       15 - Create a genre
+      16 - Create Author
     ).split('\n')
     loop do
       puts 'Select an option'
@@ -51,6 +63,7 @@ class App
       if user_input == 10
         puts 'Thank you for using this app'
         save_json
+        save_games_authors
         break
       end
       puts "\n"
@@ -73,7 +86,7 @@ class App
       list_all_albums
       enter
     when 3
-      puts 'list_games'
+      display_games
       enter
     when 4
       list_all_genres
@@ -82,7 +95,7 @@ class App
       show_labels
       enter
     when 6
-      puts 'list_authors'
+      display_authors
       enter
     when 7
       create_book
@@ -91,7 +104,8 @@ class App
       add_music_album
       enter
     when 9
-      puts 'add_game'
+      game_info
+      enter
     when 11
       move_book_to_archive
     when 12
@@ -105,6 +119,9 @@ class App
       show_items_by_label(show_label_items - 1)
     when 15
       create_genre
+      enter
+    when 16
+      create_new_author
       enter
     else
       puts 'Invalid input'
