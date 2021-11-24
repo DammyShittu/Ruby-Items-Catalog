@@ -85,15 +85,7 @@ class App
       puts 'list_authors'
       enter
     when 7
-      day_input = validate_day('Insert the day of publishment (1-31)')
-      month_input = validate_month('Insert the month of publishment(1-12)')
-      year_input = validate_year('Insert the year of publishment')
-      date = { day: day_input, month: month_input, year: year_input }
-      puts 'Insert the publisher: '
-      publisher = gets.chomp
-      puts 'Insert the state of the cover: '
-      cover = gets.chomp
-      add_book_input(date, publisher, cover)
+      create_book
     when 8
       add_music_album
       enter
@@ -102,28 +94,14 @@ class App
     when 11
       move_book_to_archive
     when 12
-      puts 'Insert title of the label:'
-      name = gets.chomp
-      puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n"\
-           "#{'Blue'.blue}\n#{'Pink'.pink}"
-      color = validate_color('Color selection: ')
-      puts color
-      create_label(name, color)
-      puts "Label #{name} succesfully created"
-      enter
+      create_label_input
     when 13
-      show_books
-      puts 'Select the index of the book to change: '
-      ind = gets.chomp.to_i
-      get_label(ind - 1)
+      ind = ask_book_input
       puts 'Select the label to be assigned: '
       ind2 = gets.chomp.to_i
-      set_label(ind - 1, ind2 - 1)
+      set_label(ind, ind2 - 1)
     when 14
-      show_labels
-      puts 'Select the label to show its items: '
-      option = gets.chomp.to_i
-      show_items_by_label(option - 1)
+      show_items_by_label(show_label_items - 1)
     when 15
       create_genre
       enter
