@@ -12,6 +12,11 @@ The project was developed based on the following UML diagram (Click to enlarge):
 
 ![](https://i.imgur.com/QtI6nZ6.png)
 
+# Video Presentation
+
+Click [here](https://drive.google.com/file/d/1apQFmWLhWAESvQlIl8FP9dAtk1Sz_HBW/view?usp=sharing
+) to view the video presentation of this project.
+
 
 # Tools used
   - Ruby
