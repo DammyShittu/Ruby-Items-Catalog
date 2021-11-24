@@ -3,7 +3,7 @@ require_relative 'label'
 module HandleInput1
   def add_book_input(publish_date, publisher, cover)
     @books << Book.new(publish_date, publisher, cover)
-    puts "Book created succesfully!"
+    puts 'Book created succesfully!'
   end
 
   def show_books
