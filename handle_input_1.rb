@@ -1,4 +1,5 @@
 require_relative 'label'
+# rubocop: disable Metrics
 module HandleInput1
   def add_book_input(publish_date, publisher, cover)
     @books << Book.new(publish_date, publisher, cover)
@@ -16,7 +17,18 @@ module HandleInput1
     end
   end
 
-  # rubocop: disable Metrics
+  def create_book
+    day_input = validate_day('Insert the day of publishment (1-31)')
+    month_input = validate_month('Insert the month of publishment(1-12)')
+    year_input = validate_year('Insert the year of publishment')
+    date = { day: day_input, month: month_input, year: year_input }
+    puts 'Insert the publisher: '
+    publisher = gets.chomp
+    puts 'Insert the state of the cover: '
+    cover = gets.chomp
+    add_book_input(date, publisher, cover)
+  end
+
   def move_book_to_archive
     archivable = []
     @books.each { |book| book.archivable && book.archived == false ? archivable << book : nil }
@@ -39,7 +51,6 @@ module HandleInput1
     end
     enter
   end
-  # rubocop: enable Metrics
 
   def create_label(title, color)
     @labels << Label.new(title, color)
@@ -52,28 +63,64 @@ module HandleInput1
     end
   end
 
-  def get_label(ind)
-    if @books[ind]
+  def ask_book_input
+    show_books
+    puts 'Select the index of the book to change: '
+    ind = gets.chomp.to_i - 1
+    if @books[ind] && ind != -1
       show_labels
+      ind
     else
-      (puts "The book that you selected doesn't exist"
-       enter)
+      puts "The book that you selected doesn't exist"
+      enter
+      ask_book_input
     end
+  end
+
+  def create_label_input
+    puts 'Insert title of the label:'
+    name = gets.chomp
+    puts "Select a color for the label: \n#{'Red'.red}\n#{'Green'.green}\n#{'Yellow'.yellow}\n"\
+         "#{'Blue'.blue}\n#{'Pink'.pink}"
+    color = validate_color('Color selection: ')
+    puts color
+    create_label(name, color)
+    puts "Label #{name} succesfully created"
+    enter
   end
 
   def set_label(ind, ind2)
     if ind != -1 && ind2 != -1
       if @labels[ind2]
-        @labels[ind2].add_item(@books[ind])
+        if @labels[ind2].items.include? @books[ind]
+          puts "Book already labeled as #{@labels[ind2].title}"
+          enter
+          run
+        else
+          @labels[ind2].add_item(@books[ind])
+          @labels.each_with_index do |label, index|
+            (label.items.include? @books[ind]) && (index != ind2) ? label.items.delete(@books[ind]) : nil
+          end
+          puts "Label #{@labels[ind2].title} assigned to the book published by #{@books[ind].publisher}"
+          enter
+        end
       else
-        (puts "The label you selected doesn't exist"
-         enter)
+        puts "The label you selected doesn't exist"
+        enter
+        show_labels
+        puts 'Select the label to be assigned: '
+        ind2 = gets.chomp.to_i
+        set_label(ind, ind2 - 1)
       end
-      puts "Label #{@labels[ind2].title} assigned to the book published by #{@books[ind].publisher}"
     else
       puts 'Invalid input'
     end
-    enter
+  end
+
+  def show_label_items
+    show_labels
+    puts 'Select the label to show its items: '
+    gets.chomp.to_i
   end
 
   def show_items_by_label(ind)
@@ -93,3 +140,4 @@ module HandleInput1
     enter
   end
 end
+# rubocop: enable Metrics

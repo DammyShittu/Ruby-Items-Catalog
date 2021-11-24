@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 describe Genre do
   before :each do
     @genre = Genre.new('Pop')
-    @album = MusicAlbum.new({ day: 31, month: 5, year: 2010 }, true)
+    @album = MusicAlbum.new('King Of Pop', { day: 31, month: 5, year: 2010 }, true)
   end
 
   it 'checks if genre is an instance of Genre class' do
@@ -24,7 +24,7 @@ describe Genre do
   end
 
   it 'confirms there are two items in the array' do
-    @album2 = @album = MusicAlbum.new({ day: 12, month: 5, year: 1997 }, false)
+    @album2 = @album = MusicAlbum.new('Made in Lagos', { day: 12, month: 5, year: 1997 }, false)
     @genre.add_item(@album)
     @genre.add_item(@album2)
     expect(@genre.items).to match_array([@album, @album2])
