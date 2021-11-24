@@ -1,4 +1,3 @@
-# rubocop: disable Layout/LineLength
 module SaveToJson
   def read_authors
     fetch_authors_json = File.read('./local/author.json')
@@ -90,5 +89,3 @@ module SaveToJson
     File.write('./local/author.json', []) if json_authors.empty?
   end
 end
-
-# rubocop: enable Layout/LineLength
