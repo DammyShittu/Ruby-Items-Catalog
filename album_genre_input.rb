@@ -30,7 +30,7 @@ module HandleAlbumAndGenreInput
     album_year = validate_year('Please, enter the year the album was published')
     date_of_publish = { day: album_day, month: album_month, year: album_year }
 
-    spotify = validate_spotify_status('Is this album on spotify?(y/n)')
+    spotify = validate_bool_input('Is this album on spotify?(y/n)')
 
     @albums << MusicAlbum.new(name, date_of_publish, spotify)
     puts 'Album has been successfully created'

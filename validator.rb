@@ -24,13 +24,13 @@ module Validator
     colors.any?(color) ? color : validate_color('Please select a color from the available list')
   end
 
-  def validate_spotify_status(str)
+  def validate_bool_input(str)
     puts str
-    on_spotify = gets.chomp.downcase
-    if on_spotify == 'y'
+    bool_input = gets.chomp.downcase
+    if bool_input == 'y'
       true
     else
-      on_spotify == 'n' ? false : validate_spotify_status('Please, select y/n')
+      bool_input == 'n' ? false : validate_bool_input('Please, select y/n')
     end
   end
 end
