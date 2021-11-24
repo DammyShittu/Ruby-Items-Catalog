@@ -1,7 +1,7 @@
 # rubocop: disable Layout/LineLength
 module SaveToJson
   def read_authors
-    fetch_authors_json = File.read('author.json')
+    fetch_authors_json = File.read('./local/author.json')
     parse_json = JSON.parse(fetch_authors_json)
     parse_json.each do |author|
       first = author['f_name']
@@ -21,7 +21,7 @@ module SaveToJson
   end
 
   def read_games
-    fetch_games_json = File.read('games.json')
+    fetch_games_json = File.read('./local/games.json')
     parse_json = JSON.parse(fetch_games_json)
     parse_json.each do |game|
       publish_on, last_played_on, multiplayer = read_dates(game)
@@ -53,14 +53,14 @@ module SaveToJson
         json_games.push(add)
       end
     end
-    games_file(json_games) if File.exist?('games.json')
-    File.new('games.json', 'w')
+    games_file(json_games) if File.exist?('./local/games.json')
+    File.new('./local/games.json', 'w')
     games_file(json_games)
   end
 
   def games_file(json_games)
-    File.write('games.json', JSON.dump(json_games)) if json_games.length.positive?
-    File.write('games.json', []) if json_games.empty?
+    File.write('./local/games.json', []) if json_games.empty?
+    File.write('./local/games.json', JSON.dump(json_games)) if json_games.length.positive?
   end
 
   def write_authors(authors_list)
@@ -80,14 +80,14 @@ module SaveToJson
         json_authors.push(add)
       end
     end
-    author_file(json_authors) if File.exist?('author.json')
-    File.new('author.json', 'w')
+    author_file(json_authors) if File.exist?('./local/author.json')
+    File.new('./local/author.json', 'w')
     author_file(json_authors)
   end
 
   def author_file(json_authors)
-    File.write('author.json', JSON.dump(json_authors)) if json_authors.length.positive?
-    File.write('author.json', []) if json_authors.empty?
+    File.write('./local/author.json', JSON.dump(json_authors)) if json_authors.length.positive?
+    File.write('./local/author.json', []) if json_authors.empty?
   end
 end
 
